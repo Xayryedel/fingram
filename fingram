@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ФинГрамотность — тест под твой возраст</title>
+<meta name="description" content="Проверь, насколько ты понимаешь финансы. Тест под твой возраст + короткие уроки. Бесплатно.">
+<meta property="og:title" content="ФинГрамотность — тест под твой возраст">
+<meta property="og:description" content="8 вопросов, персональный разбор и уроки, понятные именно тебе.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1220; --card:rgba(255,255,255,.06); --stroke:rgba(255,255,255,.12);
+    --text:#eef1f8; --muted:#a7aec4; --accent:#6ee7b7; --accent-2:#60a5fa;
+    --radius:20px; --shadow:0 20px 60px rgba(0,0,0,.35);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Manrope',system-ui,sans-serif;
+    background:radial-gradient(1200px 600px at 10% -10%, rgba(96,165,250,.18), transparent 60%),
+               radial-gradient(900px 500px at 100% 0%, rgba(110,231,183,.15), transparent 55%), var(--bg);
+    color:var(--text); line-height:1.5; min-height:100vh; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:24px 18px 80px}
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0 28px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px;cursor:pointer}
+  .logo .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 0 20px rgba(110,231,183,.7);animation:pulseDot 2.4s infinite}
+  @keyframes pulseDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.25);opacity:.75}}
+  .pill{font-size:12px;color:var(--muted);border:1px solid var(--stroke);padding:6px 12px;border-radius:999px;background:var(--card);transition:.3s}
+  
+  h1{font-size:clamp(28px,5vw,44px);line-height:1.1;font-weight:800;letter-spacing:-.02em}
+  h2{font-size:clamp(22px,3.5vw,30px);font-weight:800;letter-spacing:-.01em;margin-bottom:10px}
+  h3{font-size:18px;font-weight:700;margin-bottom:8px}
+  p.lead{color:var(--muted);font-size:clamp(15px,2vw,18px);max-width:640px}
+  .section{margin-top:34px}
+  
+  .card{
+    background:var(--card); border:1px solid var(--stroke); border-radius:var(--radius); padding:22px;
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); box-shadow:var(--shadow);
+    animation:fadeUp .5s ease both;
+  }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  .grid{display:grid;gap:14px}
+  .grid.age{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+  
+  .age-card{
+    cursor:pointer;text-align:left;border-radius:16px;padding:18px;border:1px solid var(--stroke);
+    background:var(--card);transition:transform .18s ease,border-color .18s ease,background .18s;
+    color:var(--text);font-family:inherit;font-size:15px; animation:float 6s ease-in-out infinite;
+  }
+  .age-card:nth-child(2){animation-delay:.4s}
+  .age-card:nth-child(3){animation-delay:.8s}
+  .age-card:nth-child(4){animation-delay:1.2s}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .age-card:hover{transform:translateY(-6px) scale(1.02);border-color:rgba(110,231,183,.6);background:rgba(110,231,183,.08);animation-play-state:paused}
+  .age-card strong{display:block;font-size:17px;margin-bottom:4px}
+  .age-card span{color:var(--muted);font-size:13.5px}
+  
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    border:none;border-radius:14px;padding:14px 20px;font-family:inherit;font-weight:700;font-size:15px;
+    cursor:pointer;transition:transform .15s ease,filter .15s ease,box-shadow .15s ease;text-decoration:none;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b1020}
+  .btn.primary:hover{filter:brightness(1.06);box-shadow:0 8px 24px rgba(110,231,183,.3)}
+  .btn.ghost{background:transparent;border:1px solid var(--stroke);color:var(--text)}
+  .btn.ghost:hover{background:var(--card);border-color:rgba(96,165,250,.5)}
+  .btn.block{width:100%}
+  .hidden{display:none !important}
+  
+  .progress{height:8px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;margin:14px 0 20px}
+  .progress > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .45s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 12px rgba(110,231,183,.6)}
+  .q-num{font-size:13px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+  .q-text{font-size:clamp(18px,2.6vw,22px);font-weight:700;margin:6px 0 16px}
+  
+  .answers{display:grid;gap:10px}
+  .answer{
+    text-align:left;padding:14px 16px;border-radius:14px;border:1px solid var(--stroke);
+    background:var(--card);color:var(--text);font-family:inherit;font-size:15px;cursor:pointer;
+    transition:border-color .15s,background .15s,transform .1s; animation:slideIn .35s ease both;
+  }
+  .answer:nth-child(1){animation-delay:.02s}
+  .answer:nth-child(2){animation-delay:.06s}
+  .answer:nth-child(3){animation-delay:.1s}
+  .answer:nth-child(4){animation-delay:.14s}
+  @keyframes slideIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+  .answer:hover:not(:disabled){border-color:rgba(96,165,250,.6);background:rgba(96,165,250,.08);transform:translateX(3px)}
+  .answer.correct{border-color:rgba(110,231,183,.8);background:rgba(110,231,183,.14);animation:pop .35s ease}
+  .answer.wrong{border-color:rgba(248,113,113,.8);background:rgba(248,113,113,.12);animation:shake .35s ease}
+  .answer:disabled{cursor:default;opacity:.92}
+  @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .why{margin-top:12px;font-size:14px;padding:12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--stroke);animation:fadeUp .4s ease both}
+  
+  .result-score{font-size:clamp(40px,9vw,72px);font-weight:800;line-height:1;letter-spacing:-.03em;animation:pop .5s ease}
+  .result-score small{font-size:22px;color:var(--muted);font-weight:600}
+  .result-emoji{font-size:clamp(36px,8vw,56px);line-height:1;margin-bottom:8px;display:inline-block;animation:bounce .6s ease}
+  @keyframes bounce{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+  .badge{display:inline-block;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;background:rgba(110,231,183,.16);color:var(--accent);border:1px solid rgba(110,231,183,.35)}
+  
+  .list{display:grid;gap:10px;margin-top:12px}
+  .list li{list-style:none;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--stroke);font-size:14.5px;color:var(--text);transition:.2s}
+  .list li:hover{background:rgba(110,231,183,.08);border-color:rgba(110,231,183,.4);transform:translateX(3px)}
+  
+  .muted{color:var(--muted)}
+  .row{display:flex;flex-wrap:wrap;gap:10px}
+  .input{width:100%;padding:14px 16px;border-radius:14px;border:1px solid var(--stroke);background:rgba(255,255,255,.04);color:var(--text);font-family:inherit;font-size:15px;outline:none;transition:.2s}
+  .input:focus{border-color:rgba(110,231,183,.6);box-shadow:0 0 0 3px rgba(110,231,183,.12)}
+  
+  footer{margin-top:50px;color:var(--muted);font-size:13px;text-align:center}
+  .lesson{border-left:3px solid var(--accent);padding-left:14px;margin-top:14px;transition:.2s}
+  .lesson:hover{transform:translateX(4px);border-left-color:var(--accent-2)}
+  .lesson h4{font-size:16px;margin-bottom:4px}
+  .lesson p{color:var(--muted);font-size:14.5px}
+  
+  .share-grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+  .avg-block{margin-top:16px;padding:14px;border-radius:12px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.3);font-size:14.5px}
+  .avg-block strong{color:var(--accent-2)}
+  .optional-lead{margin-top:40px;opacity:.9}
+  
+  .confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden}
+  .confetti i{position:absolute;top:-10px;width:8px;height:14px;opacity:.9;animation:fall linear forwards}
+  @keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:0}}
+  
+  .cookie-banner{
+    position:fixed;left:16px;right:16px;bottom:16px;z-index:10000;max-width:560px;margin:0 auto;padding:16px 18px;
+    background:rgba(15,18,32,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid var(--stroke);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.5);
+    font-size:14px;color:var(--text);animation:fadeUp .4s ease both;
+  }
+  .cookie-banner p{margin-bottom:10px}
+  .cookie-banner a{color:var(--accent-2);text-decoration:underline;cursor:pointer}
+  .cookie-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .cookie-actions .btn{padding:10px 14px;font-size:13.5px}
+
+  /* Стили для юридических страниц */
+  .legal-content h2{font-size:20px;font-weight:800;margin:24px 0 10px;color:var(--accent)}
+  .legal-content p, .legal-content li{color:var(--text);font-size:15.5px;margin-bottom:12px}
+  .legal-content ul{margin:0 0 12px 20px}
+  .legal-content a{color:var(--accent-2);text-decoration:underline}
+  .back-btn-legal{display:inline-block;color:var(--muted);text-decoration:none;font-size:14px;margin-bottom:18px;cursor:pointer;transition:.2s}
+  .back-btn-legal:hover{color:var(--accent)}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;animation:none !important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="logo" id="logoHome"><span class="dot"></span> ФинГрамотность</div>
+    <div class="pill" id="agePill">возраст не выбран</div>
+  </header>
+
+  <!-- ================= ГЛАВНЫЙ ЭКРАН ================= -->
+  <div id="mainApp">
+    <!-- ЭКРАН 1: ВЫБОР ВОЗРАСТА -->
+    <section id="screen-age">
+      <h1>Финансы — это не скучно.<br>Просто тебе не так объясняли.</h1>
+      <p class="lead" style="margin-top:14px">
+        Выбери свой возраст — тест и уроки подстроятся под твою ситуацию: от первой зарплаты до пенсии.
+        Без воды, без «инвестируй и разбогатей».
+      </p>
+      <div class="section"><div class="grid age" id="ageGrid"></div></div>
+      <div class="section card">
+        <h3>Что внутри</h3>
+        <ul class="list">
+          <li>🧠 Тест из 8 вопросов — покажет, где ты теряешь деньги</li>
+          <li>📘 Короткие уроки под твой возраст — по 2–3 минуты</li>
+          <li>🎯 Результат, которым захочется поделиться</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ЭКРАН 2: ТЕСТ -->
+    <section id="screen-quiz" class="hidden">
+      <div class="row" style="justify-content:space-between;align-items:center">
+        <span class="badge" id="quizBadge">Тест</span>
+        <button class="btn ghost" id="restartBtn" style="padding:8px 14px;font-size:13px">Сменить возраст</button>
+      </div>
+      <div class="progress"><i id="progressBar"></i></div>
+      <div class="card" id="questionCard">
+        <div class="q-num" id="qNum">Вопрос 1 из 8</div>
+        <div class="q-text" id="qText">…</div>
+        <div class="answers" id="answers"></div>
+      </div>
+    </section>
+
+    <!-- ЭКРАН 3: РЕЗУЛЬТАТ -->
+    <section id="screen-result" class="hidden">
+      <div class="card" id="resultCard">
+        <span class="badge" id="resultBadge">Результат</span>
+        <div class="result-emoji" id="resultEmoji">🎯</div>
+        <div class="result-score" id="scoreText">0<small>/8</small></div>
+        <h3 id="resultTitle" style="margin-top:8px">…</h3>
+        <p class="muted" id="resultDesc" style="margin-top:6px"></p>
+        <div class="progress" style="margin-top:18px"><i id="resultBar"></i></div>
+        <div class="avg-block" id="avgBlock"></div>
+      </div>
+
+      <div class="section card">
+        <h2>Что подтянуть</h2>
+        <ul class="list" id="tipsList"></ul>
+      </div>
+
+      <div class="section card">
+        <h2>Уроки под твой возраст</h2>
+        <div id="lessonsBox"></div>
+      </div>
+
+      <div class="section card">
+        <h2>Поделись — пусть проверят себя</h2>
+        <div class="share-grid">
+          <button class="btn primary" id="shareChallenge">Бросить вызов другу</button>
+          <button class="btn ghost" id="shareFamily">Отправить семье</button>
+          <button class="btn ghost" id="shareCopy">Скопировать результат</button>
+          <button class="btn primary" id="downloadImageBtn" style="grid-column: 1 / -1;">📸 Скачать картинку с результатом</button>
+        </div>
+      </div>
+
+      <div class="section card">
+        <h2>А как у тебя с другим возрастом?</h2>
+        <p class="muted" style="margin-bottom:12px">Люди часто проходят за себя и за родителя/ребёнка — это повод обсудить в семье.</p>
+        <div class="row" id="otherAgesRow"></div>
+      </div>
+
+      <div class="section row">
+        <button class="btn primary" id="retakeBtn">Пройти ещё раз</button>
+        <button class="btn ghost" id="restartBtn2">Выбрать другой возраст</button>
+      </div>
+
+      <div class="section card optional-lead">
+        <h3>Хочешь раз в месяц короткое письмо с одним полезным фактом?</h3>
+        <p class="muted" style="margin-bottom:10px;font-size:13.5px">Без спама. Один факт — одно письмо.</p>
+        <form id="leadForm" class="grid" style="gap:10px" action="https://formspree.io/f/ВАШ_ID" method="POST">
+          <input type="email" class="input" name="email" id="leadEmail" placeholder="you@example.com (необязательно)" required>
+          <input type="hidden" name="age" id="leadAge" value="">
+          <input type="hidden" name="score" id="leadScore" value="">
+          <button class="btn ghost block" type="submit" style="font-size:14px">Подписаться</button>
+          <p class="muted" style="font-size:12px">Форма работает через Formspree.</p>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= ЮРИДИЧЕСКИЕ СТРАНИЦЫ (скрыты по умолчанию) ================= -->
+  <div id="pageAbout" class="hidden legal-content">
+    <a class="back-btn-legal" onclick="showPage('main')">← На главную</a>
+    <h1>О сайте</h1>
+    <div class="card" style="margin-top:14px">
+      <p><strong>ФинГрамотность</strong> — небольшой образовательный проект. Здесь можно пройти тест по финансам, адаптированный под ваш возраст, и получить короткие уроки под свою ситуацию.</p>
+      <p>Сайт не является инвестиционной рекомендацией и не продаёт финансовые продукты. Цель — помочь разобраться в базовых вещах простым языком.</p>
+    </div>
+  </div>
+
+  <div id="pageContacts" class="hidden legal-content">
+    <a class="back-btn-legal" onclick="showPage('main')">← На главную</a>
+    <h1>Контакты</h1>
+    <div class="card" style="margin-top:14px">
+      <p>По любым вопросам — пишите на email:</p>
+      <p><strong>ВАШ_EMAIL@gmail.com</strong></p>
+      <p class="muted">Отвечаю в течение 1–2 рабочих дней.</p>
+    </div>
+  </div>
+
+  <div id="pagePrivacy" class="hidden legal-content">
+    <a class="back-btn-legal" onclick="showPage('main')">← На главную</a>
+    <h1>Политика конфиденциальности</h1>
+    <p class="muted" style="margin-bottom:14px">Последнее обновление: <span id="d"></span></p>
+    <div class="card">
+      <h2>1. Общие сведения</h2>
+      <p>Сайт «ФинГрамотность» — образовательный проект. Используя Сайт, вы соглашаетесь с настоящей Политикой.</p>
+      <h2>2. Какие данные мы обрабатываем</h2>
+      <p>Мы собираем минимум данных: email (если вы подписались), данные localStorage (выбор возраста) и технические данные (IP, браузер, cookie).</p>
+      <h2>3. Cookie и реклама</h2>
+      <p>Сайт использует cookie для аналитики и показа рекламы, в том числе через <strong>Google AdSense</strong>. Вы можете отключить персонализированную рекламу в настройках Google (<a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a>) или в настройках браузера.</p>
+      <h2>4. Ваши права</h2>
+      <p>Вы можете запросить удаление ваших данных, написав на <strong>ВАШ_EMAIL@gmail.com</strong>.</p>
+    </div>
+  </div>
+
+  <!-- ================= ФУТЕР ================= -->
+  <footer>
+    <div style="margin-bottom:10px">© <span id="year"></span> ФинГрамотность · Образовательный проект. Не является инвестиционной рекомендацией.</div>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="#" onclick="showPage('about'); return false;" style="color:var(--muted);text-decoration:none;font-size:13px;transition:.2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#a7aec4'">О сайте</a>
+      <a href="#" onclick="showPage('contacts'); return false;" style="color:var(--muted);text-decoration:none;font-size:13px;transition:.2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#a7aec4'">Контакты</a>
+      <a href="#" onclick="showPage('privacy'); return false;" style="color:var(--muted);text-decoration:none;font-size:13px;transition:.2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#a7aec4'">Политика конфиденциальности</a>
+    </div>
+  </footer>
+</div>
+
+<div class="confetti hidden" id="confettiBox"></div>
+
+<!-- COOKIE BANNER -->
+<div id="cookieBanner" class="cookie-banner hidden" role="dialog" aria-live="polite" aria-label="Уведомление о cookie">
+  <p>Мы используем cookie для работы сайта и показа рекламы. Подробнее — в <a onclick="showPage('privacy'); document.getElementById('cookieBanner').classList.add('hidden');">политике конфиденциальности</a>.</p>
+  <div class="cookie-actions">
+    <button class="btn primary" id="cookieAccept" type="button">Принять</button>
+    <button class="btn ghost" id="cookieReject" type="button">Только необходимые</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  // ==================== ДАННЫЕ ====================
+  const AGES = [
+    {
+      id:'16-22', title:'16–22', sub:'школа, универ, первые деньги', familyLabel:'Отправить маме/папе', avg:5,
+      questions:[
+        {q:'Пришла первая зарплата 30 000 ₽. Что сделать в первую очередь?', a:['Сразу потратить на то, что давно хотел','Отложить 10–20% и составить список трат','Отдать всё родителям','Вложить всё в крипту'], correct:1, why:'Сначала — подушка и план. Откладывай маленький процент с каждого поступления, пока это привычка, а не подвиг.'},
+        {q:'Что такое «сложный процент»?', a:['Процент, который банк берёт за кредит','Процент, начисляемый на процент — деньги растут быстрее','Штраф за просрочку','Способ обмануть банк'], correct:1, why:'Сложный процент работает на тебя, когда ты копишь, и против тебя, когда берёшь кредит.'},
+        {q:'Кредитная карта с лимитом 50 000 ₽. Ты не платишь вовремя. Что будет?', a:['Ничего, банк подождёт','Начнут капать проценты и штрафы, испортится кредитная история','Банк просто заблокирует карту','Спишут долг через год'], correct:1, why:'Просрочка = проценты + штраф + пятно в кредитной истории. Это дороже, чем кажется.'},
+        {q:'Зачем нужна «подушка безопасности»?', a:['Чтобы казаться богатым','Чтобы покрыть 3–6 месяцев расходов при потере дохода','Чтобы инвестировать','Чтобы платить налоги'], correct:1, why:'Подушка — это не про инвестиции, а про спокойствие. 3–6 месячных расходов на простом счёте.'},
+        {q:'Друг зовёт вложиться в «проект с гарантией 30% в месяц». Что делать?', a:['Согласиться, это же гарантия','Спросить у родителей и всё равно вложить','Отказаться: гарантированная высокая доходность — признак мошенничества','Вложить половину'], correct:2, why:'Если доходность «гарантирована» и сильно выше рынка — это почти всегда пирамида или мошенничество.'},
+        {q:'Что такое инфляция простыми словами?', a:['Рост цен — на ту же сумму со временем можно купить меньше','Падение цен','Рост зарплат','Налог'], correct:0, why:'Инфляция съедает покупательную способность. Деньги «под матрасом» дешевеют.'},
+        {q:'Ты хочешь купить телефон за 60 000 ₽. Как разумнее?', a:['Взять в кредит на 2 года','Копить 3–4 месяца и купить без переплаты','Занять у друга','Оформить рассрочку и забыть'], correct:1, why:'Кредит на технику — переплата за то, что и так подешевеет. Копить скучно, но дешевле.'},
+        {q:'Что важнее в 20 лет: начать копить или начать инвестировать?', a:['Только инвестировать, копить скучно','Сначала подушка и привычка копить, потом инвестиции','Ни то ни другое','Тратить всё, пока молодой'], correct:1, why:'Без подушки инвестиции превращаются в панику при первой просадке. Сначала база.'}
+      ],
+      lessons:[{t:'Правило 50/30/20', d:'50% — обязательное, 30% — желания, 20% — сбережения. Начни хотя бы с 10%.'},{t:'Кредитка — не деньги', d:'Это долг. Если не можешь погасить в льготный период — не бери.'},{t:'Первая подушка', d:'Цель — 3 месячных расхода. Храни на накопительном счёте, не в крипте.'}]
+    },
+    {
+      id:'23-35', title:'23–35', sub:'работа, аренда, первые крупные цели', familyLabel:'Отправить родителям', avg:5,
+      questions:[
+        {q:'Зарплата 80 000 ₽, расходы 78 000 ₽. Что делать в первую очередь?', a:['Взять кредит, чтобы дожить до зарплаты','Найти 2–3 статьи расходов, которые можно сократить, и зафиксировать 10% на сбережения','Инвестировать последние 2000 ₽','Ничего, все так живут'], correct:1, why:'Пока расходы = доход, любой сбой = долг. Сначала баланс, потом инвестиции.'},
+        {q:'Что такое «дивидендная доходность»?', a:['Процент, который компания платит акционерам от прибыли','Налог на акции','Комиссия брокера','Рост цены акции'], correct:0, why:'Дивиденды — часть прибыли, которую компания распределяет между акционерами.'},
+        {q:'Ипотека на 20 лет. Что выгоднее: досрочно гасить или копить?', a:['Всегда досрочно гасить','Зависит от ставки: если доходность вклада выше ставки ипотеки — копить/инвестировать','Всегда копить','Не платить вообще'], correct:1, why:'Сравнивай ставку ипотеки с доходностью безопасных вложений. Нет универсального ответа.'},
+        {q:'Ты получил премию 100 000 ₽. Разумный порядок действий?', a:['Сразу потратить','Пополнить подушку → закрыть дорогие долги → остаток на цель/инвестиции','Всё в крипту','Оставить на карте'], correct:1, why:'Подушка → дорогие долги → цели → инвестиции. Такой порядок снижает риск.'},
+        {q:'Что такое диверсификация?', a:['Вложить всё в одну акцию','Распределить деньги между разными активами, чтобы снизить риск','Купить один фонд','Хранить всё в наличных'], correct:1, why:'Не клади все яйца в одну корзину. Разные активы снижают общий риск.'},
+        {q:'Работодатель предлагает «серую» зарплату. Чем это рискованно?', a:['Ничем','Меньше отпускные, больничные, пенсионные накопления и риск проблем с банками','Только налогами','Только репутацией'], correct:1, why:'Серая зарплата = меньше социальных гарантий и сложности с подтверждением дохода.'},
+        {q:'Что такое «финансовая подушка» в 30 лет?', a:['3–6 месяцев расходов на случай потери работы','Кредитная карта','Инвестиции в акции','Деньги на отпуск'], correct:0, why:'В 30 лет рисков больше (аренда, семья), подушка критична.'},
+        {q:'Ты хочешь начать инвестировать. С чего начать?', a:['С советов из TikTok','С изучения базовых инструментов и небольших сумм, которые не жалко потерять','С кредита','С всего сразу'], correct:1, why:'Инвестиции — марафон. Начни с малого и учись на своих ошибках без катастроф.'}
+      ],
+      lessons:[{t:'Правило 50/30/20', d:'Адаптируй под себя: 50% обязательное, 30% желания, 20% сбережения.'},{t:'Дорогие долги — враг', d:'Кредитка под 30% и кредит на телефон — сначала гаси их, потом инвестируй.'},{t:'Подушка = свобода', d:'3–6 месяцев расходов. Это не инвестиции, это спокойствие.'}]
+    },
+    {
+      id:'36-55', title:'36–55', sub:'семья, ипотека, дети, карьера', familyLabel:'Отправить семье', avg:5,
+      questions:[
+        {q:'Что важнее в 40 лет: доходность или надёжность?', a:['Только доходность','Баланс: надёжность базы + умеренный риск для роста','Только надёжность','Не важно'], correct:1, why:'Чем ближе цели (образование детей, пенсия), тем важнее предсказуемость.'},
+        {q:'Ипотека и кредит на машину. Что гасить первым?', a:['Тот, где выше ставка','Тот, где меньше сумма','Не гасить','Оба сразу'], correct:0, why:'Сначала гаси дорогой долг — экономия на процентах больше.'},
+        {q:'Что такое страхование жизни и зачем оно в 40 лет?', a:['Бесполезная трата','Защита семьи при потере кормильца/дохода','Способ инвестировать','Налог'], correct:1, why:'Если от тебя зависят другие — страховка закрывает риск, который ты не можешь оплатить сам.'},
+        {q:'Ребёнку 10 лет. Когда начинать копить на его образование?', a:['За год до поступления','Уже сейчас: чем раньше, тем меньше ежемесячный взнос','Когда он сам заработает','Не нужно'], correct:1, why:'Сложный процент и время — твои союзники. Начинать раньше дешевле.'},
+        {q:'Что такое «диверсификация» для семьи?', a:['Один вклад в одном банке','Разные активы и источники дохода, чтобы один сбой не обрушил всё','Одна страховка','Одна акция'], correct:1, why:'Разные источники дохода и активы снижают риск для всей семьи.'},
+        {q:'Ты получил наследство. Что делать в первую очередь?', a:['Сразу потратить','Не спешить: закрыть дорогие долги, пополнить подушку, потом решать','Вложить всё в одну акцию','Отдать мошенникам'], correct:1, why:'Крупные суммы требуют паузы. Сначала база, потом решения.'},
+        {q:'Что такое налоговый вычет?', a:['Штраф','Возврат части уплаченного НДФЛ за расходы (лечение, обучение, ипотека)','Налог на имущество','Способ не платить налоги'], correct:1, why:'Вычет — законный способ вернуть часть налога. Многие им не пользуются.'},
+        {q:'Пенсионные накопления: что важно знать?', a:['Их не существует','Их можно формировать самостоятельно и следить за доходностью','Их платит только работодатель','Их нельзя проверить'], correct:1, why:'Пенсия — не только государство. Самостоятельные накопления дают контроль.'}
+      ],
+      lessons:[{t:'Порядок: подушка → долги → цели', d:'Сначала 3–6 месяцев расходов, потом дорогие долги, потом цели.'},{t:'Страховка — не инвестиция', d:'Она закрывает риски, которые ты не оплатишь сам.'},{t:'Вычеты', d:'Лечение, обучение, ипотека — проверь, что можешь вернуть.'}]
+    },
+    {
+      id:'55+', title:'55+', sub:'пенсия, здоровье, внуки, спокойствие', familyLabel:'Отправить детям', avg:5,
+      questions:[
+        {q:'Что важнее на пенсии: высокая доходность или сохранность?', a:['Только доходность','Сохранность и предсказуемость','Не важно','Риск ради риска'], correct:1, why:'Потерять накопления на пенсии опаснее, чем недозаработать.'},
+        {q:'Звонят «из банка» и просят код из СМС. Что делать?', a:['Назвать код','Никогда не называть: банк не просит код','Перевести деньги «на безопасный счёт»','Скачать приложение по ссылке'], correct:1, why:'Код из СМС — ключ к деньгам. Банк его не спрашивает. Это мошенники.'},
+        {q:'Что такое «финансовая пирамида»?', a:['Законный вклад','Схема, где старым платят из денег новых — обречена рухнуть','Госпрограмма','Страховка'], correct:1, why:'Обещают высокий доход, но денег нет — платят из новых взносов. Рушится всегда.'},
+        {q:'Вклад в банке. На что смотреть?', a:['Только на рекламу','На ставку, срок и надёжность банка (участие в системе страхования вкладов)','На цвет карты','На совет соседа'], correct:1, why:'Вклады до определённой суммы застрахованы. Проверяй, что банк в системе.'},
+        {q:'Что такое инфляция для пенсионера?', a:['Рост цен — на ту же пенсию можно купить меньше','Падение цен','Рост пенсии','Налог'], correct:0, why:'Инфляция съедает покупательную способность. Важно, чтобы деньги работали.'},
+        {q:'Внук просит «вложить» в его стартап. Как поступить?', a:['Отдать все сбережения','Помочь суммой, потерю которой переживёшь, и не трогать подушку','Взять кредит','Отдать всё'], correct:1, why:'Помогать можно, но не в ущерб собственной безопасности.'},
+        {q:'Что такое «мошенничество с переводом на безопасный счёт»?', a:['Законная процедура','Схема мошенников: «безопасных счетов» не существует','Банковская услуга','Страховка'], correct:1, why:'«Безопасный счёт» — выдумка мошенников. Настоящий банк так не делает.'},
+        {q:'Как защитить свои деньги от мошенников?', a:['Никому не говорить коды, не переводить по просьбе «банка», проверять информацию','Доверять всем звонкам','Переводить на «безопасный счёт»','Скачивать приложения по ссылкам'], correct:0, why:'Базовые правила: коды — никому, «безопасных счетов» нет, проверяй через официальный номер банка.'}
+      ],
+      lessons:[{t:'Код из СМС — никому', d:'Ни банк, ни полиция, ни «служба безопасности» его не спрашивают.'},{t:'«Безопасный счёт» не существует', d:'Это мошенники. Клади трубку и звони в банк по номеру с карты.'},{t:'Вклады и страхование', d:'Проверяй, что банк участвует в системе страхования вкладов.'}]
+    }
+  ];
+
+  const STORAGE_AGE = 'fg_age';
+  let currentAge = null;
+  let qIndex = 0;
+  let score = 0;
+  let answered = false;
+  let currentTotal = 8;
+
+  const $ = (s) => document.querySelector(s);
+  const ageGrid = $('#ageGrid');
+  const screenAge = $('#screen-age');
+  const screenQuiz = $('#screen-quiz');
+  const screenResult = $('#screen-result');
+  const agePill = $('#agePill');
+  const qNum = $('#qNum');
+  const qText = $('#qText');
+  const answers = $('#answers');
+  const progressBar = $('#progressBar');
+  const resultBar = $('#resultBar');
+  const scoreText = $('#scoreText');
+  const resultTitle = $('#resultTitle');
+  const resultDesc = $('#resultDesc');
+  const resultEmoji = $('#resultEmoji');
+  const tipsList = $('#tipsList');
+  const lessonsBox = $('#lessonsBox');
+  const otherAgesRow = $('#otherAgesRow');
+  const avgBlock = $('#avgBlock');
+
+  // ==================== УПРАВЛЕНИЕ СТРАНИЦАМИ ====================
+  window.showPage = function(page){
+    document.getElementById('mainApp').classList.add('hidden');
+    document.getElementById('pageAbout').classList.add('hidden');
+    document.getElementById('pageContacts').classList.add('hidden');
+    document.getElementById('pagePrivacy').classList.add('hidden');
+    
+    if (page === 'main') document.getElementById('mainApp').classList.remove('hidden');
+    if (page === 'about') document.getElementById('pageAbout').classList.remove('hidden');
+    if (page === 'contacts') document.getElementById('pageContacts').classList.remove('hidden');
+    if (page === 'privacy') document.getElementById('pagePrivacy').classList.remove('hidden');
+    
+    window.scrollTo({top:0, behavior:'smooth'});
+  };
+
+  document.getElementById('logoHome').addEventListener('click', () => showPage('main'));
+
+  // ==================== ВЫБОР ВОЗРАСТА ====================
+  ageGrid.innerHTML = AGES.map(a => `
+    <button class="age-card" data-age="${a.id}" type="button">
+      <strong>${a.title}</strong>
+      <span>${a.sub}</span>
+    </button>
+  `).join('');
+
+  ageGrid.addEventListener('click', (e) => {
+    const btn = e.target.closest('.age-card');
+    if (!btn) return;
+    currentAge = AGES.find(a => a.id === btn.dataset.age);
+    if (!currentAge) return;
+    try { localStorage.setItem(STORAGE_AGE, currentAge.id); } catch(_){}
+    agePill.textContent = 'возраст: ' + currentAge.title;
+    startQuiz();
+  });
+
+  // ==================== ТЕСТ ====================
+  function startQuiz(){
+    qIndex = 0;
+    score = 0;
+    answered = false;
+    currentTotal = currentAge.questions.length;
+    screenAge.classList.add('hidden');
+    screenResult.classList.add('hidden');
+    screenQuiz.classList.remove('hidden');
+    renderQuestion();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  function renderQuestion(){
+    answered = false;
+    const q = currentAge.questions[qIndex];
+    qNum.textContent = `Вопрос ${qIndex + 1} из ${currentTotal}`;
+    qText.textContent = q.q;
+    progressBar.style.width = ((qIndex) / currentTotal * 100) + '%';
+    answers.innerHTML = q.a.map((text, i) => `
+      <button class="answer" data-i="${i}" type="button">${text}</button>
+    `).join('');
+    answers.querySelectorAll('.answer').forEach(btn => {
+      btn.addEventListener('click', () => onAnswer(Number(btn.dataset.i), q));
+    });
+    const card = $('#questionCard');
+    card.style.animation = 'none';
+    void card.offsetWidth;
+    card.style.animation = 'fadeUp .4s ease both';
+  }
+
+  function onAnswer(i, q){
+    if (answered) return;
+    answered = true;
+    const buttons = answers.querySelectorAll('.answer');
+    buttons.forEach(b => b.disabled = true);
+    const correct = q.correct;
+    if (i === correct) score++;
+    buttons.forEach((b, idx) => {
+      if (idx === correct) b.classList.add('correct');
+      else if (idx === i) b.classList.add('wrong');
+    });
+    const why = document.createElement('div');
+    why.className = 'why';
+    why.textContent = '💡 ' + q.why;
+    answers.appendChild(why);
+
+    setTimeout(() => {
+      qIndex++;
+      if (qIndex < currentTotal) renderQuestion();
+      else showResult();
+    }, 1600);
+  }
+
+  // ==================== РЕЗУЛЬТАТ ====================
+  function getResultMeta(pct){
+    if (pct >= 90) return {emoji:'🧠', title:'Финансовый джедай', desc:'Ты понимаешь деньги лучше 90% людей своего возраста. Осталось только применять.'};
+    if (pct >= 75) return {emoji:'💪', title:'Крепкий середняк', desc:'База есть, но пара привычек может стоить тебе денег. Смотри уроки ниже.'};
+    if (pct >= 50) return {emoji:'🌱', title:'Есть куда расти', desc:'Ты не один — так у большинства. Главное — начать с малого.'};
+    return {emoji:'📄', title:'Чистый лист', desc:'Это даже плюс: нет вредных привычек, которые надо ломать. Начни с первого урока.'};
+  }
+
+  function showResult(){
+    screenQuiz.classList.add('hidden');
+    screenResult.classList.remove('hidden');
+    const pct = Math.round(score / currentTotal * 100);
+    const meta = getResultMeta(pct);
+
+    resultEmoji.textContent = meta.emoji;
+    scoreText.innerHTML = `${score}<small>/${currentTotal}</small>`;
+    resultBar.style.width = pct + '%';
+    resultTitle.textContent = meta.title;
+    resultDesc.textContent = meta.desc;
+
+    avgBlock.innerHTML = `Ориентир для возраста <strong>${currentAge.title}</strong> — <strong>${currentAge.avg}/${currentTotal}</strong>. Ты ${score >= currentAge.avg ? 'на уровне или выше' : 'пока ниже — но это легко исправить'}.`;
+
+    tipsList.innerHTML = currentAge.questions.slice(0, 4).map(q => `<li>${q.why}</li>`).join('');
+    lessonsBox.innerHTML = currentAge.lessons.map(l => `
+      <div class="lesson"><h4>${l.t}</h4><p>${l.d}</p></div>
+    `).join('');
+
+    $('#resultBadge').textContent = 'Возраст: ' + currentAge.title;
+
+    const leadAge = document.getElementById('leadAge');
+    const leadScore = document.getElementById('leadScore');
+    if (leadAge) leadAge.value = currentAge.title;
+    if (leadScore) leadScore.value = `${score}/${currentTotal}`;
+
+    otherAgesRow.innerHTML = AGES.filter(a => a.id !== currentAge.id).map(a => `
+      <button class="btn ghost" data-age="${a.id}" type="button" style="font-size:13.5px;padding:10px 14px">${a.title}</button>
+    `).join('');
+    otherAgesRow.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentAge = AGES.find(a => a.id === btn.dataset.age);
+        agePill.textContent = 'возраст: ' + currentAge.title;
+        startQuiz();
+      });
+    });
+
+    if (score >= 6) launchConfetti();
+
+    const card = $('#resultCard');
+    card.style.animation = 'none';
+    void card.offsetWidth;
+    card.style.animation = 'fadeUp .6s ease both';
+
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  // ==================== КОНФЕТТИ ====================
+  function launchConfetti(){
+    const box = $('#confettiBox');
+    box.classList.remove('hidden');
+    box.innerHTML = '';
+    const colors = ['#6ee7b7','#60a5fa','#f472b6','#fbbf24','#a78bfa'];
+    for (let i = 0; i < 60; i++){
+      const el = document.createElement('i');
+      el.style.left = Math.random() * 100 + '%';
+      el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      el.style.animationDuration = (1.6 + Math.random() * 1.6) + 's';
+      el.style.animationDelay = (Math.random() * 0.6) + 's';
+      el.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+      box.appendChild(el);
+    }
+    setTimeout(() => { box.classList.add('hidden'); box.innerHTML = ''; }, 3800);
+  }
+
+  // ==================== ГЕНЕРАЦИЯ КАРТИНКИ ====================
+  document.getElementById('downloadImageBtn')?.addEventListener('click', async () => {
+    if (!currentAge) return;
+    await document.fonts.ready;
+    
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const W = 1080, H = 1080;
+    canvas.width = W; canvas.height = H;
+
+    const grad = ctx.createLinearGradient(0, 0, W, H);
+    grad.addColorStop(0, '#0f1220');
+    grad.addColorStop(1, '#171b2e');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    const glow1 = ctx.createRadialGradient(200, 0, 0, 200, 0, 800);
+    glow1.addColorStop(0, 'rgba(96,165,250,.25)');
+    glow1.addColorStop(1, 'rgba(96,165,250,0)');
+    ctx.fillStyle = glow1;
+    ctx.fillRect(0, 0, W, H);
+
+    const glow2 = ctx.createRadialGradient(800, 800, 0, 800, 800, 600);
+    glow2.addColorStop(0, 'rgba(110,231,183,.2)');
+    glow2.addColorStop(1, 'rgba(110,231,183,0)');
+    ctx.fillStyle = glow2;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.fillStyle = '#6ee7b7';
+    ctx.beginPath(); ctx.arc(90, 90, 12, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#eef1f8';
+    ctx.font = '800 32px "Manrope", sans-serif';
+    ctx.fillText('ФинГрамотность', 120, 102);
+
+    ctx.fillStyle = 'rgba(255,255,255,.5)';
+    ctx.font = '600 28px "Manrope", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`Возрастная группа: ${currentAge.title}`, W/2, 300);
+
+    ctx.font = '120px "Manrope", sans-serif';
+    ctx.fillText(resultEmoji.textContent, W/2, 480);
+
+    ctx.fillStyle = '#eef1f8';
+    ctx.font = '800 180px "Manrope", sans-serif';
+    ctx.fillText(`${score}`, W/2 - 60, 680);
+    ctx.fillStyle = 'rgba(255,255,255,.3)';
+    ctx.font = '600 60px "Manrope", sans-serif';
+    ctx.fillText(`/${currentTotal}`, W/2 + 90, 680);
+
+    ctx.fillStyle = '#6ee7b7';
+    ctx.font = '700 48px "Manrope", sans-serif';
+    ctx.fillText(resultTitle.textContent, W/2, 780);
+
+    ctx.fillStyle = 'rgba(255,255,255,.7)';
+    ctx.font = '400 32px "Manrope", sans-serif';
+    const desc = resultDesc.textContent;
+    const maxWidth = 800;
+    let words = desc.split(' ');
+    let line = '';
+    let y = 850;
+    for (let n = 0; n < words.length; n++) {
+      let testLine = line + words[n] + ' ';
+      let metrics = ctx.measureText(testLine);
+      if (metrics.width > maxWidth && n > 0) {
+        ctx.fillText(line, W/2, y);
+        line = words[n] + ' ';
+        y += 45;
+      } else {
+        line = testLine;
+      }
+    }
+    ctx.fillText(line, W/2, y);
+
+    ctx.fillStyle = 'rgba(255,255,255,.4)';
+    ctx.font = '500 24px "Manrope", sans-serif';
+    ctx.fillText('Проверь себя на нашем сайте!', W/2, 1000);
+
+    const link = document.createElement('a');
+    link.download = `fingramotnost-result-${score}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+
+  // ==================== ПЕРЕЗАПУСК ====================
+  function backToAgeSelect(){
+    screenQuiz.classList.add('hidden');
+    screenResult.classList.add('hidden');
+    screenAge.classList.remove('hidden');
+    agePill.textContent = 'возраст не выбран';
+    try { localStorage.removeItem(STORAGE_AGE); } catch(_){}
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  $('#restartBtn')?.addEventListener('click', backToAgeSelect);
+  $('#restartBtn2')?.addEventListener('click', backToAgeSelect);
+  $('#retakeBtn')?.addEventListener('click', () => { if (currentAge) startQuiz(); });
+
+  // ==================== ШАРИНГ ====================
+  async function doShare(text, title){
+    const url = location.href;
+    if (navigator.share){
+      try { await navigator.share({title: title || 'ФинГрамотность', text, url}); return; } 
+      catch(e) { if(e.name !== 'AbortError') console.warn('Share failed', e); }
+    }
+    try {
+      await navigator.clipboard.writeText(text + ' ' + url);
+      alert('Скопировано в буфер обмена! Вставь в чат.');
+    } catch(_){ alert(text + '\n' + url); }
+  }
+
+  $('#shareChallenge')?.addEventListener('click', () => {
+    const text = `Я прошёл тест на финграмотность (возраст ${currentAge.title}) — ${score}/${currentTotal}. Слабо побить?`;
+    doShare(text, 'Бросить вызов');
+  });
+
+  $('#shareFamily')?.addEventListener('click', () => {
+    const text = `Прошёл тест на финграмотность (возраст ${currentAge.title}) — ${score}/${currentTotal}. Пройди тоже, интересно сравнить!`;
+    doShare(text, currentAge.familyLabel || 'Поделиться');
+  });
+
+  $('#shareCopy')?.addEventListener('click', async () => {
+    const text = `Мой результат: ${score}/${currentTotal} (возраст ${currentAge.title}) — тест на финграмотность`;
+    try {
+      await navigator.clipboard.writeText(text + ' ' + location.href);
+      alert('Результат скопирован!');
+    } catch(_){ alert(text + '\n' + location.href); }
+  });
+
+  // ==================== ВОССТАНОВЛЕНИЕ ВОЗРАСТА ====================
+  try {
+    const saved = localStorage.getItem(STORAGE_AGE);
+    if (saved){
+      const found = AGES.find(a => a.id === saved);
+      if (found){
+        currentAge = found;
+        agePill.textContent = 'возраст: ' + found.title;
+      }
+    }
+  } catch(_){}
+
+  // ==================== COOKIE BANNER ====================
+  const COOKIE_KEY = 'fg_cookie_consent';
+  const cookieBanner = document.getElementById('cookieBanner');
+  try {
+    if (!localStorage.getItem(COOKIE_KEY) && cookieBanner) {
+      setTimeout(() => cookieBanner.classList.remove('hidden'), 1000);
+    }
+  } catch(_){}
+
+  function setCookieConsent(value){
+    try { localStorage.setItem(COOKIE_KEY, value); } catch(_){}
+    if (cookieBanner) cookieBanner.classList.add('hidden');
+  }
+
+  document.getElementById('cookieAccept')?.addEventListener('click', () => setCookieConsent('all'));
+  document.getElementById('cookieReject')?.addEventListener('click', () => setCookieConsent('necessary'));
+
+  // ==================== ДАТА И ГОД ====================
+  const yearEl = $('#year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  const dateEl = $('#d');
+  if (dateEl) dateEl.textContent = new Date().toLocaleDateString('ru-RU');
+
+})();
+</script>
+</body>
+</html>
