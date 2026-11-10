@@ -266,7 +266,7 @@
     <h1>Контакты</h1>
     <div class="card" style="margin-top:14px">
       <p>По любым вопросам — пишите на email:</p>
-      <p><strong>ВАШ_EMAIL@gmail.com</strong></p>
+      <p><strong><a href="#" id="contactEmailLink" class="email-protect" style="color:var(--accent); text-decoration:none;"></a></strong></p>
       <p class="muted">Отвечаю в течение 1–2 рабочих дней.</p>
     </div>
   </div>
@@ -283,7 +283,7 @@
       <h2>3. Cookie и реклама</h2>
       <p>Сайт использует cookie для аналитики и показа рекламы, в том числе через <strong>Google AdSense</strong>. Вы можете отключить персонализированную рекламу в настройках Google (<a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a>) или в настройках браузера.</p>
       <h2>4. Ваши права</h2>
-      <p>Вы можете запросить удаление ваших данных, написав на <strong>ВАШ_EMAIL@gmail.com</strong>.</p>
+      <p>Вы можете запросить удаление ваших данных, написав на <strong><a href="#" id="privacyEmailLink" class="email-protect" style="color:var(--accent); text-decoration:none;"></a></strong>.</p>
     </div>
   </div>
 
@@ -312,6 +312,24 @@
 <script>
 (function(){
   'use strict';
+
+  // ==================== ЗАЩИТА ПОЧТЫ ОТ СПАМ-БОТОВ ====================
+  // Почта собирается из кусочков в рантайме. Боты, читающие HTML, её не увидят.
+  const userEmail = 'romaryzhkov.22' + '@' + 'gmail.com';
+  
+  // Вставляем почту в контакты
+  const contactLink = document.getElementById('contactEmailLink');
+  if (contactLink) {
+    contactLink.href = 'mailto:' + userEmail;
+    contactLink.textContent = userEmail;
+  }
+
+  // Вставляем почту в политику
+  const privacyLink = document.getElementById('privacyEmailLink');
+  if (privacyLink) {
+    privacyLink.href = 'mailto:' + userEmail;
+    privacyLink.textContent = userEmail;
+  }
 
   // ==================== ДАННЫЕ ====================
   const AGES = [
